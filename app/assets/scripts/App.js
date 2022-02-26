@@ -1,1 +1,1 @@
-alert('To jest test');
+import '../styles/styles.css';
