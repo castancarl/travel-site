@@ -1,3 +1,3 @@
 module.exports = {
-  entry: './app/asset/scripts/App.js ',
+  entry: 'appassetsscriptsApp.js ',
 };
