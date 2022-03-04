@@ -16,7 +16,12 @@
   }
 }
 
-@define-mixin bor {
+@define-mixin borred {
   border: 5px solid red;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+@define-mixin borblue {
+  border: 5px solid blue;
   background-color: rgba(0, 0, 0, 0.2);
 }
