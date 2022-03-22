@@ -16,6 +16,7 @@
   }
 
   &__title {
+    color: chartreuse;
     margin-top: 0.7rem;
     margin-bottom: 0.8rem;
     text-align: center;
