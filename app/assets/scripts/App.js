@@ -6,4 +6,16 @@ if (module.hot) {
 
 /* Lesson example code below this line */
 
-console.log('this is a tesssst!');
+function Person() {
+  this.greet = function () {
+    console.log('hello there !!');
+  };
+}
+
+let john = new Person();
+
+john.greet();
+
+let jane = new Person();
+
+jane.greet();
