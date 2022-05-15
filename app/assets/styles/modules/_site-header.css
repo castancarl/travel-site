@@ -37,7 +37,7 @@
     height: 20px;
     background-color: #fff;
     @mixin atMedium {
-/*       display: none; */
+      display: none;
     }
   }
 
