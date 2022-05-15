@@ -15,15 +15,15 @@ person(mark.name, mark.color);
 
 // EXAMPLE 2
 
-let mark = {
+let mark2 = {
   name: 'MARK',
   color: 'BLUE',
   greet: function () {
     console.log(
       'hello, my name is ' +
-        mark.name +
+        mark2.name +
         ' and my favourite color is ' +
-        mark.color
+        mark2.color
     );
   },
 };
