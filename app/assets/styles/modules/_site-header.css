@@ -47,5 +47,10 @@
     @mixin atMedium {
       display: block;
     }
+ 
+    &--show-at-click {
+      display: block;
+    }
+    
   }
 }

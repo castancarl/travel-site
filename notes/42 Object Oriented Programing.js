@@ -1,5 +1,8 @@
 // 42 OBJECT ORIENTED PROGRAMING
 
+/* This is two line
+comment */
+
 // EXAMPLE 1 - function and OBJECT with its variables are separated
 
 function person(name, color) {
