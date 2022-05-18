@@ -1,0 +1,48 @@
+/* 
+-----------------------------------------------------TRANSITION  
+*/
+
+.site-header {
+  // defaul backround-color is transparent
+  // it will change atMedium VP  or if it will be expanded
+  // so we add effect to transition of value from transparent to blue
+  transition: background-color 0.5s ease-out;
+  // this is BASELINE rule for this element hence we put transition right here
+
+  @mixin atMedium {
+    background-color: rgba(47, 85, 114, 0.3);
+  }
+
+  // this class is added via JS MobileMenu module
+  &--is-expanded {
+    background-color: rgba(47, 85, 114, 0.5);
+  }
+}
+
+/* 
+----------------------------------------------------OPACITY INSTEAD DISPLAY:NONE
+*/
+
+&__menu-content {
+  opacity: 0;
+  transform: scale(1.2); /* initialy it will be bigger */
+  // set transition from OPACITY  to ALL because we change also Z-INDEX
+  transition: all 0.3s ease-out;
+  /*     // we don't use display: none anymore , now we use OPACITY so even contet is unvisible its still there in browser so to avoid accidetaly pressing sth, we use z-index to bring it underneath. It is necessary to add POSITION */
+  z-index: -10;
+  padding-top: 100px;
+  text-align: center;
+
+  @mixin atMedium {
+    opactity: 1;
+    z-index: 1;
+    padding-top: 0;
+    transform: scale(1);
+  }
+
+  &--is-visible {
+    opacity: 1;
+    z-index: 1;
+    transform: scale(1);
+  }
+}
