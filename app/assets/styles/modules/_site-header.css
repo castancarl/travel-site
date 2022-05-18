@@ -48,7 +48,7 @@
       display: block;
     }
  
-    &--show-at-click {
+    &--is-visible {
       display: block;
     }
     
