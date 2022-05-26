@@ -34,9 +34,15 @@
           </div>
           <nav class="primary-nav primary-nav--pull-right">
             <ul>
-              <li><a href="#our-beginning">Our Beginning</a></li>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#testimonials">Testimonials</a></li>
+              <li>
+                <a id="our-beginging-link" href="#our-beginning"
+                  >Our Beginning</a
+                >
+              </li>
+              <li><a id="features-link" href="#features">Features</a></li>
+              <li>
+                <a id="testimonials-link" href="#testimonials">Testimonials</a>
+              </li>
             </ul>
           </nav>
         </div>
@@ -90,7 +96,13 @@
       </div>
     </section>
 
-    <section id="our-beginning" class="page-section">
+    <!-- TODO: we need a wayt to relate this DIV to the header link id='our-begining-link' so we adding CUSTOM ATtRIBUTES (begins with word DATA) -->
+
+    <section
+      id="our-beginning"
+      class="page-section"
+      data-matching-link="#our-begining-link"
+    >
       <div class="wrapper">
         <h2
           class="headline headline--center headline--light headline--b-margin-small"
@@ -181,7 +193,11 @@
       </div>
     </section>
 
-    <section id="features" class="page-section page-section--blue">
+    <section
+      id="features"
+      class="page-section page-section--blue"
+      data-matching-link="#feature-link"
+    >
       <div class="wrapper">
         <h2 class="section-title">
           <img
@@ -255,6 +271,7 @@
     <section
       id="testimonials"
       class="page-section page-section--no-b-padding-until-large page-section--testimonials"
+      data-matching-link="#testimonial-link"
     >
       <div class="wrapper wrapper--no-padding-until-large">
         <h2 class="section-title section-title--blue">
