@@ -47,6 +47,11 @@
       font-size: 1rem;
       padding: 12px 0;
       background-color: transparent;
+      /* TODO: this class will exist if SickyHeader.js module add it */
+
+      &.is-current-link {
+        color: #fabb69;
+      }
     }
   }
 }

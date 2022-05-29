@@ -14,7 +14,7 @@ class RevealOnScroll {
 
   calculateIfScrolledTo(el) {
     console.log(el.getBoundingClientRect().y);
-    /* it is a measure of how far the top edge of an ELEMENT is from the top edge of the CURRENT BOUNDING RECTANGLE - in this case browser's viewport */
+    /* it is a measure of how far the top edge of an ELEMENT is from the top edge of viewport */
 
     let scrollPercent =
       (el.getBoundingClientRect().y / window.innerHeight) * 100;
