@@ -2,7 +2,9 @@ import '../styles/styles.css';
 import MobileMenu from './modules/MobileMenu';
 import RevealOnScroll from './modules/ReveaOnScroll';
 import StickyHeader from './modules/StickyHeader';
+import Modal from './modules/Modal';
 
+new Modal();
 let stickyheader = new StickyHeader();
 
 new RevealOnScroll(document.querySelectorAll('.feature-item'), 75);
