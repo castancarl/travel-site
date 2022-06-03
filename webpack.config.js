@@ -4,8 +4,17 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const fse = require('fs-extra');
 
 const postCSSPlugins = [require('postcss-import'), require('postcss-mixins'), require('postcss-simple-vars'), require('postcss-nested'), require('autoprefixer')];
+
+class RunAfterCompile {
+  apply(compiler) {
+    compiler.hooks.done.tap('Copy images', function () {
+      fse.copySync('./app/assets/images', './dist/assets/images');
+    });
+  }
+}
 
 /* ------------------------COMMMON-------------------------------- */
 let cssConfig = {
@@ -19,9 +28,23 @@ let cssConfig = {
   ],
 };
 
+// read all files in app directory, and filter only html
+// then map each file with fse plugin
+let pages = fse
+  .readdirSync('./app')
+  .filter(function (file) {
+    return file.endsWith('.html');
+  })
+  .map(function (page) {
+    return new HtmlWebpackPlugin({
+      filename: page,
+      template: `./app/${page}`,
+    });
+  });
+
 let config = {
   entry: './app/assets/scripts/App.js',
-  plugins: [new HtmlWebpackPlugin({ filename: 'index.html', template: './app/index.html' })],
+  plugins: pages,
   module: {
     rules: [cssConfig],
   },
@@ -51,6 +74,16 @@ if (currentTask == 'dev') {
 /* ------------------------BUILD - PRODUCTION----------------------------- */
 if (currentTask == 'build') {
   config.mode = 'production';
+  config.module.rules.push({
+    test: /\.js$/,
+    exclude: /(node_modules)/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env'],
+      },
+    },
+  });
 
   cssConfig.use.unshift(MiniCssExtractPlugin.loader);
 
@@ -66,7 +99,7 @@ if (currentTask == 'build') {
     minimizer: ['...', new CssMinimizerPlugin()],
   };
 
-  config.plugins.push(new CleanWebpackPlugin(), new MiniCssExtractPlugin({ filename: 'styles.[chunkhash].css' }));
+  config.plugins.push(new CleanWebpackPlugin(), new MiniCssExtractPlugin({ filename: 'styles.[chunkhash].css' }), new RunAfterCompile());
 }
 
 module.exports = config;
