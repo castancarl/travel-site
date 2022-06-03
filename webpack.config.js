@@ -3,6 +3,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const postCSSPlugins = [require('postcss-import'), require('postcss-mixins'), require('postcss-simple-vars'), require('postcss-nested'), require('autoprefixer')];
 
@@ -20,6 +21,7 @@ let cssConfig = {
 
 let config = {
   entry: './app/assets/scripts/App.js',
+  plugins: [new HtmlWebpackPlugin({ filename: 'index.html', template: './app/index.html' })],
   module: {
     rules: [cssConfig],
   },
@@ -27,11 +29,15 @@ let config = {
 
 /* ------------------------DEV - DEVELOPING----------------------------- */
 if (currentTask == 'dev') {
+  config.mode = 'development';
+
   cssConfig.use.unshift('style-loader');
+
   config.output = {
     filename: 'bundled.js',
     path: path.resolve(__dirname, 'app'),
   };
+
   config.devServer = {
     before: function (app, server) {
       server._watch('./app/**/*.html');
@@ -41,18 +47,18 @@ if (currentTask == 'dev') {
     port: 3000,
     host: '0.0.0.0',
   };
-
-  config.mode = 'development';
 }
 /* ------------------------BUILD - PRODUCTION----------------------------- */
 if (currentTask == 'build') {
+  config.mode = 'production';
+
   cssConfig.use.unshift(MiniCssExtractPlugin.loader);
+
   config.output = {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
   };
-  config.mode = 'production';
 
   config.optimization = {
     splitChunks: { chunks: 'all', minSize: 1000 },
@@ -60,7 +66,7 @@ if (currentTask == 'build') {
     minimizer: ['...', new CssMinimizerPlugin()],
   };
 
-  config.plugins = [new CleanWebpackPlugin(), new MiniCssExtractPlugin({ filename: 'styles.[chunkhash].css' })];
+  config.plugins.push(new CleanWebpackPlugin(), new MiniCssExtractPlugin({ filename: 'styles.[chunkhash].css' }));
 }
 
 module.exports = config;
