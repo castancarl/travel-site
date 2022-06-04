@@ -8,8 +8,9 @@ new StickyHeader();
 new RevealOnScroll(document.querySelectorAll('.feature-item'), 75);
 new RevealOnScroll(document.querySelectorAll('.testimonial'), 60);
 new MobileMenu();
-let modal;
 
+/* ---MODAL--- */
+let modal;
 document.querySelectorAll('.open-modal').forEach((el) => {
   el.addEventListener('click', (e) => {
     e.preventDefault();
@@ -26,6 +27,7 @@ document.querySelectorAll('.open-modal').forEach((el) => {
   });
 });
 
+/* ---HOT ACTION--- */
 if (module.hot) {
   module.hot.accept();
 }
