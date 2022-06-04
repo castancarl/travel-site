@@ -11,9 +11,18 @@
 /* 
 So the question becomes, how can we have the speed and security benefits of a static website while still being able to perform actual actions that require server side logic */
 
-exports.handler = function (event, context, callback) {
+export function handler(event, context, callback) {
+  // So right here you could talk to a database, you could tell a third party service to send an email. This is something that CLIENT never see.
   callback(null, {
     statusCode: 200,
     body: 'Welcome to the super secret area',
+    // body: value of our response This is only what client see
   });
-};
+}
+/* what is executing or running that function that we wrote? NOT personal computer, web browser or Netlify(it only hosts our HTML, CSS , JAVASCRIPT). NETLIFY takes the function that we wrote and they send it over to a private and trustworthy environment over on Amazon Web Services. */
+
+/* Then Net Lafi sets up a convenient  URL and whenever anyone sends a request to that URL Netlify tells Amazon Web services to run and execute our function. */
+
+/* II is called CLOUDY-FUNcTION becouse in  not being executed on web-browsere or a server that we as the developer ever need to worry about or be aware */
+
+/* And depending on how much traffic our Net Lafi site receives, Amazon Web services will use as few or as many of their computing resources to execute our function. */
