@@ -4,6 +4,13 @@ export function handler(event, context, callback) {
 <p>Here we can tell you that the sky is <strong>blue</strong> an two plus two equals four</p>
 `;
 
+  if (event.body) {
+    body = JSON.parse(event.body);
+    console.log(event.body);
+  } else {
+    body = {};
+  }
+
   callback(null, {
     statusCode: 200,
     body: secretContent,
