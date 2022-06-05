@@ -1,6 +1,24 @@
 export function handler(event, context, callback) {
-  callback(null, {
-    statusCode: 200,
-    body: 'Welcome to the super secret area',
-  });
+  const secretContent = `
+    <h3>Welcome to The Secret Area</h3>
+    <p>Here we can tell you that the sky is <strong>blue</strong> an two plus two equals four</p>`;
+
+  let body;
+
+  if (event.body) {
+    body = JSON.parse(event.body);
+  } else {
+    body = {};
+  }
+
+  if (body.password == 'secret') {
+    callback(null, {
+      statusCode: 200,
+      body: secretContent,
+    });
+  } else {
+    callback(null, {
+      statusCode: 401,
+    });
+  }
 }
