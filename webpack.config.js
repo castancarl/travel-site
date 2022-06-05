@@ -46,7 +46,19 @@ let config = {
   entry: './app/assets/scripts/App.js',
   plugins: pages,
   module: {
-    rules: [cssConfig],
+    rules: [
+      cssConfig,
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react', '@babel/preset-env'],
+          },
+        },
+      },
+    ],
   },
 };
 
@@ -74,16 +86,6 @@ if (currentTask == 'dev') {
 /* ------------------------BUILD - PRODUCTION----------------------------- */
 if (currentTask == 'build') {
   config.mode = 'production';
-  config.module.rules.push({
-    test: /\.js$/,
-    exclude: /(node_modules)/,
-    use: {
-      loader: 'babel-loader',
-      options: {
-        presets: ['@babel/preset-env'],
-      },
-    },
-  });
 
   cssConfig.use.unshift(MiniCssExtractPlugin.loader);
 
