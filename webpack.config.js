@@ -99,6 +99,7 @@ if (currentTask == 'build') {
     splitChunks: { chunks: 'all', minSize: 1000 },
     minimize: true,
     minimizer: ['...', new CssMinimizerPlugin()],
+    // '...' --> This is our way of saying we want to use the default or built in web pack minimized, but then we do
   };
 
   config.plugins.push(new CleanWebpackPlugin(), new MiniCssExtractPlugin({ filename: 'styles.[chunkhash].css' }), new RunAfterCompile());
